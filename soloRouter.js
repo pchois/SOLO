@@ -21,7 +21,7 @@ soloRouter.get('/years', soloStack.retrieveYears);
 soloRouter.get('/brands', soloStack.retrieveBrands);
 
 // get all models given a brand
-soloRouter.get('/models', soloStack.retrieveModels);
+soloRouter.get('/models/:brandId', soloStack.retrieveModels);
 
 
 // export menu Router

@@ -12,7 +12,6 @@ import { MessageService } from './message.service';
 
 import {MatSelectModule} from '@angular/material/select';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 
 
 
@@ -26,7 +25,6 @@ import {NoopAnimationsModule} from '@angular/platform-browser/animations';
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    NoopAnimationsModule,
     MatSelectModule
   ],
   providers: [CarDataService, MessageService],

@@ -1,12 +1,16 @@
 
 export class Year {
+  id: number;
   year: number;
 }
 
 export class Brand {
-  brand: string;
+  id: number;
+  name: string;
 }
 
 export class Model {
-  model: string;
+  id: number;
+  name: string;
+  trim: string;
 }

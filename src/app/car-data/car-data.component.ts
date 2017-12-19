@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Year, Brand, Model } from '../car-data';
 import { CarDataService } from '../car-data.service';
+import { MatSelectChange } from '@angular/material';
 
 @Component({
   selector: 'app-car-data',
@@ -18,7 +19,6 @@ export class CarDataComponent implements OnInit {
   ngOnInit() {
     this.getYears();
     this.getBrands();
-    this.getModels();
   }
 
   getYears(): void {
@@ -31,8 +31,8 @@ export class CarDataComponent implements OnInit {
     .subscribe(brands => this.brands = brands);
   }
 
-  getModels(): void {
-    this.cardataService.getModel()
+  getModels(item: MatSelectChange): void {
+    this.cardataService.getModel(item.value.id)
     .subscribe(models => this.models = models);
   }
 
