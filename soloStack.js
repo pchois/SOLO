@@ -40,9 +40,21 @@ const retrieveModels = (req, res, next) => {
   });
 }
 
+// get all trims  given a brand and model
+const retrieveTrims = (req, res, next) => {
+  db.all("SELECT id, trim FROM Models WHERE name = $name ORDER BY trim ASC;", {$name: req.params.modelId}, (err, trims) => {
+    if(err){
+      res.status(500).send(err);
+    }else{
+      res.status(200).send(trims);
+    }
+  });
+}
+
 // export the functions
 module.exports = {
   retrieveYears,
   retrieveBrands,
-  retrieveModels
+  retrieveModels,
+  retrieveTrims
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Year, Brand, Model } from './car-data';
+import { Year, Brand, Model, Trim } from './car-data';
 import { Observable } from 'rxjs/Observable';
 import { MessageService } from './message.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -14,6 +14,8 @@ export class CarDataService {
 
   private modelsUrl = 'http://localhost:4000/api/solo/models';  // URL to web api to retrieve models based on the selected brand
 
+  private trimsUrl = 'http://localhost:4000/api/solo/trims';  // URL to web api to retrieve trims based on the selected brand and model
+
   constructor(private http: HttpClient, private messageService: MessageService) { }
 
     getYear(): Observable<Year[]> {
@@ -27,6 +29,11 @@ export class CarDataService {
     getModel(id: number): Observable<Model[]> {
       const url = `${this.modelsUrl}/${id}`;
       return this.http.get<Model[]>(url);
+    }
+
+    getTrim(name: string): Observable<Trim[]> {
+      const url = `${this.trimsUrl}/${name}`;
+      return this.http.get<Trim[]>(url);
     }
 
     /** Log a CarDataService message with the MessageService */

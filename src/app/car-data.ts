@@ -12,5 +12,9 @@ export class Brand {
 export class Model {
   id: number;
   name: string;
+}
+
+export class Trim {
+  id: number;
   trim: string;
 }

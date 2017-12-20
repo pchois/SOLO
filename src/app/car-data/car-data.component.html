@@ -1,11 +1,4 @@
-<h2> Select your year, make, model and trim. </h2>
-
-<mat-form-field>
-  <mat-select placeholder="Select a year">
-    <mat-option *ngFor="let year of years" [value]="year.year">{{ year.year }}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
+<h2> Select your make, model, trim and year. </h2>
 
 <mat-form-field>
   <mat-select placeholder="Select a make" (change)="getModels($event)">
@@ -15,8 +8,22 @@
 </mat-form-field>
 
 <mat-form-field>
-  <mat-select placeholder="Select a model">
-    <mat-option *ngFor="let model of models" [value]="model.name">{{ model.name }}
+  <mat-select placeholder="Select a model" (change)="getTrims($event)">
+    <mat-option *ngFor="let model of models" [value]="model">{{ model.name }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field>
+  <mat-select placeholder="Select a trim">
+    <mat-option *ngFor="let trim of trims" [value]="trim">{{ trim.trim }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field>
+  <mat-select placeholder="Select a year">
+    <mat-option *ngFor="let year of years" [value]="year.year">{{ year.year }}
     </mat-option>
   </mat-select>
 </mat-form-field>

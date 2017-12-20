@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Year, Brand, Model } from '../car-data';
+import { Year, Brand, Model, Trim } from '../car-data';
 import { CarDataService } from '../car-data.service';
 import { MatSelectChange } from '@angular/material';
 
@@ -13,17 +13,12 @@ export class CarDataComponent implements OnInit {
   years: Year[];
   brands: Brand[];
   models: Model[];
+  trims: Trim[];
 
   constructor(private cardataService: CarDataService) { }
 
   ngOnInit() {
-    this.getYears();
     this.getBrands();
-  }
-
-  getYears(): void {
-    this.cardataService.getYear()
-    .subscribe(years => this.years = years);
   }
 
   getBrands(): void {
@@ -34,6 +29,16 @@ export class CarDataComponent implements OnInit {
   getModels(item: MatSelectChange): void {
     this.cardataService.getModel(item.value.id)
     .subscribe(models => this.models = models);
+  }
+
+  getTrims(item: MatSelectChange): void {
+    this.cardataService.getTrim(item.value.name)
+    .subscribe(trims => this.trims = trims);
+  }
+
+  getYears(): void {
+    this.cardataService.getYear()
+    .subscribe(years => this.years = years);
   }
 
 }

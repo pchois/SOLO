@@ -23,6 +23,9 @@ soloRouter.get('/brands', soloStack.retrieveBrands);
 // get all models given a brand
 soloRouter.get('/models/:brandId', soloStack.retrieveModels);
 
+// get all trims  given a brand and model
+soloRouter.get('/trims/:modelId', soloStack.retrieveTrims);
+
 
 // export menu Router
 module.exports = soloRouter;
