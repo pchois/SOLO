@@ -2,7 +2,7 @@
 
 <mat-form-field>
   <mat-select placeholder="Select a make" (change)="getModels($event)">
-    <mat-option *ngFor="let brand of brands" [value]="brand">{{ brand.name }}
+    <mat-option *ngFor="let make of makes" [value]="make">{{ make.name }}
     </mat-option>
   </mat-select>
 </mat-form-field>
@@ -16,14 +16,14 @@
 
 <mat-form-field>
   <mat-select placeholder="Select a trim">
-    <mat-option *ngFor="let trim of trims" [value]="trim">{{ trim.trim }}
+    <mat-option *ngFor="let trim of trims" [value]="trim">{{ trim.name }}
     </mat-option>
   </mat-select>
 </mat-form-field>
 
 <mat-form-field>
   <mat-select placeholder="Select a year">
-    <mat-option *ngFor="let year of years" [value]="year.year">{{ year.year }}
+    <mat-option *ngFor="let year of years" [value]="year.year">{{ year.name }}
     </mat-option>
   </mat-select>
 </mat-form-field>

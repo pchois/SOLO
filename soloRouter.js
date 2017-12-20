@@ -17,11 +17,11 @@ const soloStack = require('./soloStack.js');
 // get all years
 soloRouter.get('/years', soloStack.retrieveYears);
 
-// get all brands
-soloRouter.get('/brands', soloStack.retrieveBrands);
+// get all makes
+soloRouter.get('/makes', soloStack.retrieveMakes);
 
 // get all models given a brand
-soloRouter.get('/models/:brandId', soloStack.retrieveModels);
+soloRouter.get('/models/:makeId', soloStack.retrieveModels);
 
 // get all trims  given a brand and model
 soloRouter.get('/trims/:modelId', soloStack.retrieveTrims);

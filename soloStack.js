@@ -18,20 +18,20 @@ const retrieveYears = (req, res, next) => {
   });
 }
 
-// get all brands
-const retrieveBrands = (req, res, next) => {
-  db.all("SELECT * FROM Brands;", (err, brands) => {
+// get all makes
+const retrieveMakes = (req, res, next) => {
+  db.all("SELECT * FROM Makes;", (err, makes) => {
     if(err){
       res.status(500).send(err);
     }else{
-      res.status(200).send(brands);
+      res.status(200).send(makes);
     }
   });
 }
 
 // get all models given a brand
 const retrieveModels = (req, res, next) => {
-  db.all("SELECT DISTINCT(name) FROM Models WHERE brand_id = $id ORDER BY name ASC;", {$id: req.params.brandId}, (err, models) => {
+  db.all("SELECT * FROM Models m JOIN MakeModelMap mmm on m.id = mmm.model_id WHERE mmm.make_id = $id ORDER BY name ASC;", {$id: req.params.makeId}, (err, models) => {
     if(err){
       res.status(500).send(err);
     }else{
@@ -42,7 +42,7 @@ const retrieveModels = (req, res, next) => {
 
 // get all trims  given a brand and model
 const retrieveTrims = (req, res, next) => {
-  db.all("SELECT id, trim FROM Models WHERE name = $name ORDER BY trim ASC;", {$name: req.params.modelId}, (err, trims) => {
+  db.all("SELECT * from Trims t JOIN ModelTrimMap mtm on t.id = mtm.trim_id WHERE mtm.model_id = $id;", {$id: req.params.modelId}, (err, trims) => {
     if(err){
       res.status(500).send(err);
     }else{
@@ -54,7 +54,7 @@ const retrieveTrims = (req, res, next) => {
 // export the functions
 module.exports = {
   retrieveYears,
-  retrieveBrands,
+  retrieveMakes,
   retrieveModels,
   retrieveTrims
 }

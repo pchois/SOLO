@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Year, Brand, Model, Trim } from '../car-data';
+import { Year, Make, Model, Trim } from '../car-data';
 import { CarDataService } from '../car-data.service';
 import { MatSelectChange } from '@angular/material';
 
@@ -11,19 +11,19 @@ import { MatSelectChange } from '@angular/material';
 export class CarDataComponent implements OnInit {
 
   years: Year[];
-  brands: Brand[];
+  makes: Make[];
   models: Model[];
   trims: Trim[];
 
   constructor(private cardataService: CarDataService) { }
 
   ngOnInit() {
-    this.getBrands();
+    this.getMakes();
   }
 
-  getBrands(): void {
-    this.cardataService.getBrand()
-    .subscribe(brands => this.brands = brands);
+  getMakes(): void {
+    this.cardataService.getMake()
+    .subscribe(makes => this.makes = makes);
   }
 
   getModels(item: MatSelectChange): void {
@@ -32,7 +32,7 @@ export class CarDataComponent implements OnInit {
   }
 
   getTrims(item: MatSelectChange): void {
-    this.cardataService.getTrim(item.value.name)
+    this.cardataService.getTrim(item.value.model_id)
     .subscribe(trims => this.trims = trims);
   }
 

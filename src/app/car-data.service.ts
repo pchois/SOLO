@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Year, Brand, Model, Trim } from './car-data';
+import { Year, Make, Model, Trim } from './car-data';
 import { Observable } from 'rxjs/Observable';
 import { MessageService } from './message.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -10,7 +10,7 @@ export class CarDataService {
 
   private yearsUrl = 'http://localhost:4000/api/solo/years';  // URL to web api to retrieve years
 
-  private brandsUrl = 'http://localhost:4000/api/solo/brands';  // URL to web api to retrieve brands
+  private makesUrl = 'http://localhost:4000/api/solo/makes';  // URL to web api to retrieve makes
 
   private modelsUrl = 'http://localhost:4000/api/solo/models';  // URL to web api to retrieve models based on the selected brand
 
@@ -18,12 +18,12 @@ export class CarDataService {
 
   constructor(private http: HttpClient, private messageService: MessageService) { }
 
+    getMake(): Observable<Make[]> {
+    return this.http.get<Make[]>(this.makesUrl);
+  }
+
     getYear(): Observable<Year[]> {
       return this.http.get<Year[]>(this.yearsUrl);
-    }
-
-    getBrand(): Observable<Brand[]> {
-      return this.http.get<Brand[]>(this.brandsUrl);
     }
 
     getModel(id: number): Observable<Model[]> {
@@ -31,8 +31,8 @@ export class CarDataService {
       return this.http.get<Model[]>(url);
     }
 
-    getTrim(name: string): Observable<Trim[]> {
-      const url = `${this.trimsUrl}/${name}`;
+    getTrim(id: number): Observable<Trim[]> {
+      const url = `${this.trimsUrl}/${id}`;
       return this.http.get<Trim[]>(url);
     }
 
