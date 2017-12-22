@@ -10,10 +10,11 @@ import { MatSelectChange } from '@angular/material';
 })
 export class CarDataComponent implements OnInit {
 
-  years: Year[];
-  makes: Make[];
-  models: Model[];
-  trims: Trim[];
+  years: Year[] = [];
+  makes: Make[] = [];
+  models: Model[] = [];
+  trims: Trim[] = [];
+  //private number pepe: '';
 
   constructor(private cardataService: CarDataService) { }
 
@@ -24,10 +25,11 @@ export class CarDataComponent implements OnInit {
   getMakes(): void {
     this.cardataService.getMake()
     .subscribe(makes => this.makes = makes);
+
   }
 
-  getModels(item: MatSelectChange): void {
-    this.cardataService.getModel(item.value.id)
+  getModels(): void {
+    this.cardataService.getModel(this.pepe)
     .subscribe(models => this.models = models);
   }
 

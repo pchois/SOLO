@@ -10,10 +10,18 @@ import { CarDataService } from './car-data.service';
 import { MessagesComponent } from './messages/messages.component';
 import { MessageService } from './message.service';
 
-import {MatSelectModule} from '@angular/material/select';
+import {MatSelectModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {CdkTableModule} from '@angular/cdk/table';
 
-
+@NgModule({
+  exports: [
+    MatSelectModule,
+    CdkTableModule
+  ]
+})
+export class DemoMaterialModule {}
 
 @NgModule({
   declarations: [
@@ -25,7 +33,9 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatSelectModule
+    FormsModule,
+    ReactiveFormsModule,
+    DemoMaterialModule
   ],
   providers: [CarDataService, MessageService],
   bootstrap: [AppComponent]
