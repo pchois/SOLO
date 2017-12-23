@@ -1,22 +1,33 @@
 <h2> Select your make, model, trim and year. </h2>
 
 <mat-form-field>
-  <mat-select placeholder="Select a make" (change)="getModels($event)" [(ngModel)]="pepe">
+  <mat-select placeholder="Select a make" (change)="getModels($event)" [(ngModel)]="make_id">
     <mat-option *ngFor="let make of makes" [value]="make.id">{{ make.name }}
     </mat-option>
   </mat-select>
 </mat-form-field>
 
-<mat-form-field *ngIf="pepe && models.length > 0">
-  <mat-select placeholder="Select a model" (change)="getTrims($event)" [(ngModel)]="modelo">
-    <mat-option *ngFor="let model of models" [value]="model.id">{{ model.name }}
+<mat-form-field *ngIf="models.length > 0">
+  <mat-select placeholder="Select a model" (change)="getTrims($event)" [(ngModel)]="model_id">
+    <mat-option *ngFor="let model of models" [value]="model.model_id">{{ model.name }}
     </mat-option>
   </mat-select>
 </mat-form-field>
 
-<mat-form-field>
-  <mat-select placeholder="Select a trim">
-    <mat-option *ngFor="let trim of trims" [value]="trim">{{ trim.name }}
+<mat-form-field *ngIf="trims.length > 0">
+  <mat-select placeholder="Select a trim" (change)="getYears($event)" [(ngModel)]="trim_id">
+    <mat-option *ngFor="let trim of trims" [value]="trim.trim_id">{{ trim.name }}
     </mat-option>
   </mat-select>
 </mat-form-field>
+
+<mat-form-field *ngIf="years.length > 0">
+  <mat-select placeholder="Select a year" (change)="getClasses($event)" [(ngModel)]="year_id">
+    <mat-option *ngFor="let year of years" [value]="year.year_id">{{ year.name }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<div *ngIf="classes.length > 0">
+<mat-card *ngFor="let class of classes">Your base class is: {{class.name}}</mat-card>
+</div>

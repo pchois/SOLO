@@ -17,3 +17,8 @@ export class Year {
   id: number;
   name: number;
 }
+
+export class Class {
+  id: number;
+  name: string;
+}

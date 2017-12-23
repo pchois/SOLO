@@ -14,8 +14,6 @@ soloRouter.use(morgan('tiny'));
 const soloStack = require('./soloStack.js');
 
 // ROUTES
-// get all years
-soloRouter.get('/years', soloStack.retrieveYears);
 
 // get all makes
 soloRouter.get('/makes', soloStack.retrieveMakes);
@@ -25,6 +23,12 @@ soloRouter.get('/models/:makeId', soloStack.retrieveModels);
 
 // get all trims  given a brand and model
 soloRouter.get('/trims/:modelId', soloStack.retrieveTrims);
+
+// get all years  given a brand, model and trim
+soloRouter.get('/years/:trimId', soloStack.retrieveYears);
+
+// get a class given the year
+soloRouter.get('/class/:yearId', soloStack.retrieveClass);
 
 
 // export menu Router

@@ -16,7 +16,9 @@ export class CarDataService {
 
   private yearsUrl = 'http://localhost:4000/api/solo/years';  // URL to web api to retrieve years
 
-  constructor(private http: HttpClient, private messageService: MessageService) { }
+  private classUrl = 'http://localhost:4000/api/solo/class';  // URL to web api to retrieve class
+
+  constructor(private http: HttpClient) { }
 
     getMake(): Observable<Make[]> {
     return this.http.get<Make[]>(this.makesUrl);
@@ -32,13 +34,14 @@ export class CarDataService {
       return this.http.get<Trim[]>(url);
     }
 
-    getYear(): Observable<Year[]> {
-      return this.http.get<Year[]>(this.yearsUrl);
+    getYear(id: number): Observable<Year[]> {
+      const url = `${this.yearsUrl}/${id}`;
+      return this.http.get<Year[]>(url);
     }
 
-    /** Log a CarDataService message with the MessageService */
-    private log(message: string) {
-      this.messageService.add('CarDataService: ' + message);
+    getClass(id: number): Observable<Class[]> {
+      const url = `${this.classUrl}/${id}`;
+      return this.http.get<Class[]>(url);
     }
 
 }

@@ -7,17 +7,6 @@ const sqlite3 = require('sqlite3');
 const db = new sqlite3.Database('./database.sqlite');
 
 // STACKS
-// get all years
-const retrieveYears = (req, res, next) => {
-  db.all("SELECT * FROM Years;", (err, years) => {
-    if(err){
-      res.status(500).send(err);
-    }else{
-      res.status(200).send(years);
-    }
-  });
-}
-
 // get all makes
 const retrieveMakes = (req, res, next) => {
   db.all("SELECT * FROM Makes;", (err, makes) => {
@@ -42,7 +31,7 @@ const retrieveModels = (req, res, next) => {
 
 // get all trims  given a brand and model
 const retrieveTrims = (req, res, next) => {
-  db.all("SELECT * from Trims t JOIN ModelTrimMap mtm on t.id = mtm.trim_id WHERE mtm.model_id = $id;", {$id: req.params.modelId}, (err, trims) => {
+  db.all("SELECT * from Trims t JOIN ModelTrimMap mtm on t.id = mtm.trim_id WHERE mtm.model_id = $id ORDER BY name ASC;", {$id: req.params.modelId}, (err, trims) => {
     if(err){
       res.status(500).send(err);
     }else{
@@ -51,10 +40,33 @@ const retrieveTrims = (req, res, next) => {
   });
 }
 
+// get all years  given a brand, model and trim
+const retrieveYears = (req, res, next) => {
+  db.all("SELECT * FROM Years y JOIN TrimYearMap tym ON y.id = tym.year_id WHERE trim_id = $id ORDER BY name ASC;", {$id: req.params.trimId}, (err, years) => {
+    if(err){
+      res.status(500).send(err);
+    }else{
+      res.status(200).send(years);
+    }
+  });
+}
+
+// get a class given a year
+const retrieveClass = (req, res, next) => {
+  db.all("SELECT * FROM Classes c JOIN Scenario4 s4 ON c.id = s4.class_id WHERE year_id = $id ORDER BY name ASC;;", {$id: req.params.yearId}, (err, classes) => {
+    if(err){
+      res.status(500).send(err);
+    }else{
+      res.status(200).send(classes);
+    }
+  });
+}
+
 // export the functions
 module.exports = {
-  retrieveYears,
   retrieveMakes,
   retrieveModels,
-  retrieveTrims
+  retrieveTrims,
+  retrieveYears,
+  retrieveClass
 }
