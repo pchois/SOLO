@@ -20,9 +20,14 @@ const retrieveMakes = (req, res, next) => {
 
 // get all models given a brand
 const retrieveModels = (req, res, next) => {
-  db.all("SELECT * FROM Models m JOIN MakeModelMap mmm on m.id = mmm.model_id WHERE mmm.make_id = $id ORDER BY name ASC;", {$id: req.params.makeId}, (err, models) => {
+  db.all("SELECT * FROM Models m JOIN MakeModelMap mmm on m.id = mmm.model_id WHERE mmm.make_id = $id ORDER BY name ASC;",
+  {$id: req.query.makeId},
+  (err, models) => {
     if(err){
       res.status(500).send(err);
+    }else if(models[0] == null){
+      const none = ['empty'];
+      res.status(200).send(models);
     }else{
       res.status(200).send(models);
     }
@@ -31,7 +36,9 @@ const retrieveModels = (req, res, next) => {
 
 // get all trims  given a brand and model
 const retrieveTrims = (req, res, next) => {
-  db.all("SELECT * from Trims t JOIN ModelTrimMap mtm on t.id = mtm.trim_id WHERE mtm.model_id = $id ORDER BY name ASC;", {$id: req.params.modelId}, (err, trims) => {
+  db.all("SELECT * from Trims t JOIN ModelTrimMap mtm on t.id = mtm.trim_id WHERE mtm.make_id = $make_id AND mtm.model_id = $model_id ORDER BY name ASC;",
+  {$make_id: req.query.makeId, $model_id: req.query.modelId},
+  (err, trims) => {
     if(err){
       res.status(500).send(err);
     }else{
@@ -40,9 +47,11 @@ const retrieveTrims = (req, res, next) => {
   });
 }
 
-// get all years  given a brand, model and trim
+// get all years given a brand, model and trim
 const retrieveYears = (req, res, next) => {
-  db.all("SELECT * FROM Years y JOIN TrimYearMap tym ON y.id = tym.year_id WHERE trim_id = $id ORDER BY name ASC;", {$id: req.params.trimId}, (err, years) => {
+  db.all("SELECT * FROM Years y JOIN TrimYearMap tym ON y.id = tym.year_id WHERE tym.make_id = $make_id AND tym.model_id = $model_id AND tym.trim_id = $trim_id ORDER BY name ASC;",
+  {$make_id: req.query.makeId, $model_id: req.query.modelId, $trim_id: req.query.trimId},
+  (err, years) => {
     if(err){
       res.status(500).send(err);
     }else{
@@ -51,9 +60,24 @@ const retrieveYears = (req, res, next) => {
   });
 }
 
+// get all years given a brand and model
+const retrieveClass2 = (req, res, next) => {
+  db.all("SELECT * FROM Classes c JOIN Scenario1 s1 ON c.id = s1.class_id WHERE s1.make_id = $make_id AND s1.model_id = $model_id ORDER BY name ASC;",
+  {$make_id: req.query.makeId, $model_id: req.query.modelId},
+  (err, years2) => {
+    if(err){
+      res.status(500).send(err);
+    }else{
+      res.status(200).send(years2);
+    }
+  });
+}
+
 // get a class given a year
 const retrieveClass = (req, res, next) => {
-  db.all("SELECT * FROM Classes c JOIN Scenario4 s4 ON c.id = s4.class_id WHERE year_id = $id ORDER BY name ASC;;", {$id: req.params.yearId}, (err, classes) => {
+  db.all("SELECT * FROM Classes c JOIN Scenario4 s4 ON c.id = s4.class_id WHERE s4.make_id = $make_id AND s4.model_id = $model_id AND s4.trim_id = $trim_id AND s4.year_id = $year_id ORDER BY name ASC;",
+  {$make_id: req.query.makeId, $model_id: req.query.modelId, $trim_id: req.query.trimId, $year_id: req.query.yearId},
+  (err, classes) => {
     if(err){
       res.status(500).send(err);
     }else{
@@ -68,5 +92,6 @@ module.exports = {
   retrieveModels,
   retrieveTrims,
   retrieveYears,
-  retrieveClass
+  retrieveClass,
+  retrieveClass2
 }
