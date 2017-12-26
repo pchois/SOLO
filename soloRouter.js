@@ -33,5 +33,8 @@ soloRouter.get('/class', soloStack.retrieveClass);
 // get a class given the model
 soloRouter.get('/class2', soloStack.retrieveClass2);
 
+// get a class given the trim
+soloRouter.get('/class3', soloStack.retrieveClass3);
+
 // export menu Router
 module.exports = soloRouter;

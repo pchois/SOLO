@@ -16,6 +16,7 @@ export class CarDataComponent implements OnInit {
   trims: Trim[] = [];
   classes: Class[] = [];
   classes2: Class[] = [];
+  classes3: Class[] = [];
   query_data = {
     make_id: 0,
     model_id: 0,
@@ -35,6 +36,12 @@ export class CarDataComponent implements OnInit {
   }
 
   getModels(item: MatSelectChange): void {
+    this.models = [];
+    this.trims = [];
+    this.years = [];
+    this.classes = [];
+    this.classes2 = [];
+    this.classes3 = [];
     this.query_data = {
       make_id: item.value,
       model_id: 0,
@@ -47,6 +54,11 @@ export class CarDataComponent implements OnInit {
   }
 
   getTrims(item: MatSelectChange): void {
+    this.trims = [];
+    this.years = [];
+    this.classes = [];
+    this.classes2 = [];
+    this.classes3 = [];
     const make_id = this.query_data.make_id;
     this.query_data = {
       make_id: make_id,
@@ -60,11 +72,15 @@ export class CarDataComponent implements OnInit {
     if(this.trims.length == 0){
       this.cardataService.getClass2(this.query_data.make_id, this.query_data.model_id)
       .subscribe(classes2 => this.classes2 = classes2);
-      console.log(this.classes2);
     }
   }
 
   getYears(item: MatSelectChange): void {
+    this.years = [];
+    this.classes = [];
+    this.classes2 = [];
+    this.classes3 = [];
+    console.log('years: ' +this.years);
     const make_id = this.query_data.make_id;
     const model_id = this.query_data.model_id;
     this.query_data = {
@@ -74,12 +90,18 @@ export class CarDataComponent implements OnInit {
       year_id: 0
     };
     console.log(this.query_data);
-    this.query_data.trim_id = item.value;
     this.cardataService.getYear(this.query_data.make_id, this.query_data.model_id, this.query_data.trim_id)
     .subscribe(years => this.years = years);
+    if(this.years.length == 0){
+      this.cardataService.getClass3(this.query_data.make_id, this.query_data.model_id, this.query_data.trim_id)
+      .subscribe(classes3 => this.classes3 = classes3);
+    }
   }
 
   getClasses(item: MatSelectChange): void {
+    this.classes = [];
+    this.classes2 = [];
+    this.classes3 = [];
     const make_id = this.query_data.make_id;
     const model_id = this.query_data.model_id;
     const trim_id = this.query_data.trim_id;
@@ -89,12 +111,9 @@ export class CarDataComponent implements OnInit {
       trim_id: trim_id,
       year_id: item.value
     };
-    console.log(this.query_data);
-    this.query_data.year_id = item.value;
     this.cardataService.getClass(this.query_data.make_id, this.query_data.model_id, this.query_data.trim_id, this.query_data.year_id)
     .subscribe(classes => this.classes = classes);
+    console.log('found: ' + this.classes);
   }
-
-
 
 }

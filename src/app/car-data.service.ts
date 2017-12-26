@@ -20,6 +20,8 @@ export class CarDataService {
 
   private class2Url = 'http://localhost:4000/api/solo/class2';  // URL to web api to retrieve class
 
+  private class3Url = 'http://localhost:4000/api/solo/class3';  // URL to web api to retrieve class
+
   constructor(private http: HttpClient) { }
 
     getMake(): Observable<Make[]> {
@@ -48,6 +50,11 @@ export class CarDataService {
 
     getClass2(make_id: number, model_id: number): Observable<Class[]> {
       const url = `${this.class2Url}/?makeId=${make_id}&modelId=${model_id}`;
+      return this.http.get<Class[]>(url);
+    }
+
+    getClass3(make_id: number, model_id: number, trim_id: number): Observable<Class[]> {
+      const url = `${this.class3Url}/?makeId=${make_id}&modelId=${model_id}&trimId=${trim_id}`;
       return this.http.get<Class[]>(url);
     }
 

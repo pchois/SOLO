@@ -60,28 +60,41 @@ const retrieveYears = (req, res, next) => {
   });
 }
 
-// get all years given a brand and model
-const retrieveClass2 = (req, res, next) => {
-  db.all("SELECT * FROM Classes c JOIN Scenario1 s1 ON c.id = s1.class_id WHERE s1.make_id = $make_id AND s1.model_id = $model_id ORDER BY name ASC;",
-  {$make_id: req.query.makeId, $model_id: req.query.modelId},
-  (err, years2) => {
-    if(err){
-      res.status(500).send(err);
-    }else{
-      res.status(200).send(years2);
-    }
-  });
-}
-
 // get a class given a year
 const retrieveClass = (req, res, next) => {
-  db.all("SELECT * FROM Classes c JOIN Scenario4 s4 ON c.id = s4.class_id WHERE s4.make_id = $make_id AND s4.model_id = $model_id AND s4.trim_id = $trim_id AND s4.year_id = $year_id ORDER BY name ASC;",
+  db.get("SELECT * FROM Classes c JOIN Scenario4 s4 ON c.id = s4.class_id WHERE s4.make_id = $make_id AND s4.model_id = $model_id AND s4.trim_id = $trim_id AND s4.year_id = $year_id ORDER BY name ASC;",
   {$make_id: req.query.makeId, $model_id: req.query.modelId, $trim_id: req.query.trimId, $year_id: req.query.yearId},
   (err, classes) => {
     if(err){
       res.status(500).send(err);
     }else{
       res.status(200).send(classes);
+    }
+  });
+}
+
+// get all years given a brand and model
+const retrieveClass2 = (req, res, next) => {
+  db.all("SELECT * FROM Classes c JOIN Scenario1 s1 ON c.id = s1.class_id WHERE s1.make_id = $make_id AND s1.model_id = $model_id ORDER BY name ASC;",
+  {$make_id: req.query.makeId, $model_id: req.query.modelId},
+  (err, classes2) => {
+    if(err){
+      res.status(500).send(err);
+    }else{
+      res.status(200).send(classes2);
+    }
+  });
+}
+
+// get all years given a brand and model
+const retrieveClass3 = (req, res, next) => {
+  db.all("SELECT * FROM Classes c JOIN Scenario2 s2 ON c.id = s2.class_id WHERE s2.make_id = $make_id AND s2.model_id = $model_id AND s2.trim_id = $trim_id ORDER BY name ASC;",
+  {$make_id: req.query.makeId, $model_id: req.query.modelId, $trim_id: req.query.trimId},
+  (err, classes3) => {
+    if(err){
+      res.status(500).send(err);
+    }else{
+      res.status(200).send(classes3);
     }
   });
 }
@@ -93,5 +106,6 @@ module.exports = {
   retrieveTrims,
   retrieveYears,
   retrieveClass,
-  retrieveClass2
+  retrieveClass2,
+  retrieveClass3
 }
