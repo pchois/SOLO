@@ -1,41 +1,52 @@
 <h2> Select your make, model, trim and year. </h2>
 
 <mat-form-field>
-  <mat-select placeholder="Select a make" (change)="getModels($event)" [(ngModel)]="make_id">
+  <mat-select placeholder="Select a make" (change)="getModels($event)" [(ngModel)]="selectedMake">
     <mat-option *ngFor="let make of makes" [value]="make.id">{{ make.name }}
     </mat-option>
   </mat-select>
 </mat-form-field>
 
 <mat-form-field *ngIf="models.length > 0">
-  <mat-select placeholder="Select a model" (change)="getTrims($event)" [(ngModel)]="model_id">
+  <mat-select placeholder="Select a model" (change)="getTrims($event)" [(ngModel)]="selectedModel">
     <mat-option *ngFor="let model of models" [value]="model.model_id">{{ model.name }}
     </mat-option>
   </mat-select>
 </mat-form-field>
 
 <mat-form-field *ngIf="trims.length > 0">
-  <mat-select placeholder="Select a trim" (change)="getYears($event)" [(ngModel)]="trim_id">
+  <mat-select placeholder="Select a trim" (change)="getYears($event)" [(ngModel)]="selectedTrim">
     <mat-option *ngFor="let trim of trims" [value]="trim.trim_id">{{ trim.name }}
     </mat-option>
   </mat-select>
 </mat-form-field>
 
 <mat-form-field *ngIf="years.length > 0">
-  <mat-select placeholder="Select a year" (change)="getClasses($event)" [(ngModel)]="year_id">
+  <mat-select placeholder="Select a year" (change)="getScenario4Class($event)" [(ngModel)]="selectedYear">
     <mat-option *ngFor="let year of years" [value]="year.year_id">{{ year.name }}
     </mat-option>
   </mat-select>
 </mat-form-field>
 
-<div *ngIf="classes.length > 0">
-<mat-card *ngFor="let class of classes">Your base class is: {{class.name}}</mat-card>
+<mat-form-field *ngIf="yearsS3.length > 0">
+  <mat-select placeholder="Select a year" (change)="getScenario3Class($event)" [(ngModel)]="selectedYearS3">
+    <mat-option *ngFor="let years3 of yearsS3" [value]="years3.year_id">{{ years3.name }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<div *ngIf="scenario1.length > 0">
+<mat-card *ngFor="let s1 of scenario1" [(ngModel)]="selectedClassS1" class="base-class">Your base class is: {{s1.name}}</mat-card>
 </div>
 
-<div *ngIf="classes2.length > 0">
-<mat-card *ngFor="let class2 of classes2">Your base class is: {{class2.name}}</mat-card>
+<div *ngIf="scenario2.length > 0">
+<mat-card *ngFor="let s2 of scenario2" [(ngModel)]="selectedClassS2" class="base-class">Your base class is: {{s2.name}}</mat-card>
 </div>
 
-<div *ngIf="classes3.length > 0">
-<mat-card *ngFor="let class3 of classes3">Your base class is: {{class3.name}}</mat-card>
+<div *ngIf="scenario3.length > 0">
+<mat-card *ngFor="let s3 of scenario3" [(ngModel)]="selectedClassS3" class="base-class">Your base class is: {{s3.name}}</mat-card>
+</div>
+
+<div *ngIf="scenario4.length > 0">
+<mat-card *ngFor="let s4 of scenario4" [(ngModel)]="selectedClassS4" class="base-class">Your base class is: {{s4.name}}</mat-card>
 </div>

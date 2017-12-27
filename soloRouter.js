@@ -27,14 +27,20 @@ soloRouter.get('/trims', soloStack.retrieveTrims);
 // get all years  given a brand, model and trim
 soloRouter.get('/years', soloStack.retrieveYears);
 
-// get a class given the year
-soloRouter.get('/class', soloStack.retrieveClass);
+// get all years  given a brand, model and trim
+soloRouter.get('/yearss3', soloStack.retrieveYearsS3);
 
 // get a class given the model
-soloRouter.get('/class2', soloStack.retrieveClass2);
+soloRouter.get('/s1', soloStack.retrieveClassS1);
 
 // get a class given the trim
-soloRouter.get('/class3', soloStack.retrieveClass3);
+soloRouter.get('/s2', soloStack.retrieveClassS2);
+
+// get a class given the model
+soloRouter.get('/s3', soloStack.retrieveClassS3);
+
+// get a class given the year
+soloRouter.get('/s4', soloStack.retrieveClassS4);
 
 // export menu Router
 module.exports = soloRouter;

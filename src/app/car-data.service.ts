@@ -16,11 +16,15 @@ export class CarDataService {
 
   private yearsUrl = 'http://localhost:4000/api/solo/years';  // URL to web api to retrieve years
 
-  private classUrl = 'http://localhost:4000/api/solo/class';  // URL to web api to retrieve class
+  private yearsS3Url = 'http://localhost:4000/api/solo/yearss3';  // URL to web api to retrieve years
 
-  private class2Url = 'http://localhost:4000/api/solo/class2';  // URL to web api to retrieve class
+  private classS1Url = 'http://localhost:4000/api/solo/s1';  // URL to web api to retrieve class
 
-  private class3Url = 'http://localhost:4000/api/solo/class3';  // URL to web api to retrieve class
+  private classS2Url = 'http://localhost:4000/api/solo/s2';  // URL to web api to retrieve class
+
+  private classS3Url = 'http://localhost:4000/api/solo/s3';  // URL to web api to retrieve class
+
+  private classS4Url = 'http://localhost:4000/api/solo/s4';  // URL to web api to retrieve class
 
   constructor(private http: HttpClient) { }
 
@@ -43,18 +47,28 @@ export class CarDataService {
       return this.http.get<Year[]>(url);
     }
 
-    getClass(make_id: number, model_id: number, trim_id: number, year_id: number): Observable<Class[]> {
-      const url = `${this.classUrl}/?makeId=${make_id}&modelId=${model_id}&trimId=${trim_id}&yearId=${year_id}`;
+    getYearS3(make_id: number, model_id: number): Observable<Year[]> {
+      const url = `${this.yearsS3Url}/?makeId=${make_id}&modelId=${model_id}`;
+      return this.http.get<Year[]>(url);
+    }
+
+    getScenario1(make_id: number, model_id: number): Observable<Class[]> {
+      const url = `${this.classS1Url}/?makeId=${make_id}&modelId=${model_id}`;
       return this.http.get<Class[]>(url);
     }
 
-    getClass2(make_id: number, model_id: number): Observable<Class[]> {
-      const url = `${this.class2Url}/?makeId=${make_id}&modelId=${model_id}`;
+    getScenario2(make_id: number, model_id: number, trim_id: number): Observable<Class[]> {
+      const url = `${this.classS2Url}/?makeId=${make_id}&modelId=${model_id}&trimId=${trim_id}`;
       return this.http.get<Class[]>(url);
     }
 
-    getClass3(make_id: number, model_id: number, trim_id: number): Observable<Class[]> {
-      const url = `${this.class3Url}/?makeId=${make_id}&modelId=${model_id}&trimId=${trim_id}`;
+    getScenario3(make_id: number, model_id: number, year_id: number): Observable<Class[]> {
+      const url = `${this.classS3Url}/?makeId=${make_id}&modelId=${model_id}&yearId=${year_id}`;
+      return this.http.get<Class[]>(url);
+    }
+
+    getScenario4(make_id: number, model_id: number, trim_id: number, year_id: number): Observable<Class[]> {
+      const url = `${this.classS4Url}/?makeId=${make_id}&modelId=${model_id}&trimId=${trim_id}&yearId=${year_id}`;
       return this.http.get<Class[]>(url);
     }
 

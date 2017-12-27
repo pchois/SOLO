@@ -60,23 +60,36 @@ const retrieveYears = (req, res, next) => {
   });
 }
 
-// get a class given a year
-const retrieveClass = (req, res, next) => {
-  db.get("SELECT * FROM Classes c JOIN Scenario4 s4 ON c.id = s4.class_id WHERE s4.make_id = $make_id AND s4.model_id = $model_id AND s4.trim_id = $trim_id AND s4.year_id = $year_id ORDER BY name ASC;",
-  {$make_id: req.query.makeId, $model_id: req.query.modelId, $trim_id: req.query.trimId, $year_id: req.query.yearId},
-  (err, classes) => {
+// get all years given a brand, model and trim
+const retrieveYearsS3 = (req, res, next) => {
+  db.all("SELECT * FROM Years y JOIN ModelYearMap mym ON y.id = mym.year_id WHERE mym.make_id = $make_id AND mym.model_id = $model_id ORDER BY name ASC;",
+  {$make_id: req.query.makeId, $model_id: req.query.modelId},
+  (err, yearss3) => {
     if(err){
       res.status(500).send(err);
     }else{
-      res.status(200).send(classes);
+      res.status(200).send(yearss3);
     }
   });
 }
 
 // get all years given a brand and model
-const retrieveClass2 = (req, res, next) => {
+const retrieveClassS1 = (req, res, next) => {
   db.all("SELECT * FROM Classes c JOIN Scenario1 s1 ON c.id = s1.class_id WHERE s1.make_id = $make_id AND s1.model_id = $model_id ORDER BY name ASC;",
   {$make_id: req.query.makeId, $model_id: req.query.modelId},
+  (err, classes1) => {
+    if(err){
+      res.status(500).send(err);
+    }else{
+      res.status(200).send(classes1);
+    }
+  });
+}
+
+// get all years given a brand and model
+const retrieveClassS2 = (req, res, next) => {
+  db.all("SELECT * FROM Classes c JOIN Scenario2 s2 ON c.id = s2.class_id WHERE s2.make_id = $make_id AND s2.model_id = $model_id AND s2.trim_id = $trim_id ORDER BY name ASC;",
+  {$make_id: req.query.makeId, $model_id: req.query.modelId, $trim_id: req.query.trimId},
   (err, classes2) => {
     if(err){
       res.status(500).send(err);
@@ -87,14 +100,27 @@ const retrieveClass2 = (req, res, next) => {
 }
 
 // get all years given a brand and model
-const retrieveClass3 = (req, res, next) => {
-  db.all("SELECT * FROM Classes c JOIN Scenario2 s2 ON c.id = s2.class_id WHERE s2.make_id = $make_id AND s2.model_id = $model_id AND s2.trim_id = $trim_id ORDER BY name ASC;",
-  {$make_id: req.query.makeId, $model_id: req.query.modelId, $trim_id: req.query.trimId},
+const retrieveClassS3 = (req, res, next) => {
+  db.all("SELECT * FROM Classes c JOIN Scenario3 s3 ON c.id = s3.class_id WHERE s3.make_id = $make_id AND s3.model_id = $model_id AND s3.year_id = $year_id ORDER BY name ASC;",
+  {$make_id: req.query.makeId, $model_id: req.query.modelId, $year_id: req.query.yearId},
   (err, classes3) => {
     if(err){
       res.status(500).send(err);
     }else{
       res.status(200).send(classes3);
+    }
+  });
+}
+
+// get a class given a year
+const retrieveClassS4 = (req, res, next) => {
+  db.all("SELECT * FROM Classes c JOIN Scenario4 s4 ON c.id = s4.class_id WHERE s4.make_id = $make_id AND s4.model_id = $model_id AND s4.trim_id = $trim_id AND s4.year_id = $year_id ORDER BY name ASC;",
+  {$make_id: req.query.makeId, $model_id: req.query.modelId, $trim_id: req.query.trimId, $year_id: req.query.yearId},
+  (err, classes4) => {
+    if(err){
+      res.status(500).send(err);
+    }else{
+      res.status(200).send(classes4);
     }
   });
 }
@@ -105,7 +131,9 @@ module.exports = {
   retrieveModels,
   retrieveTrims,
   retrieveYears,
-  retrieveClass,
-  retrieveClass2,
-  retrieveClass3
+  retrieveYearsS3,
+  retrieveClassS1,
+  retrieveClassS2,
+  retrieveClassS3,
+  retrieveClassS4
 }

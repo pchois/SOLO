@@ -1,1 +1,4 @@
-@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+.base-class {
+  width: 250px;
+}
