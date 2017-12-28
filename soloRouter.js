@@ -10,7 +10,7 @@ soloRouter.use(bodyParser.json());
 // set morgan (logging)
 soloRouter.use(morgan('tiny'));
 
-// STACK
+// define the STACK
 const soloStack = require('./soloStack.js');
 
 // ROUTES
@@ -18,28 +18,28 @@ const soloStack = require('./soloStack.js');
 // get all makes
 soloRouter.get('/makes', soloStack.retrieveMakes);
 
-// get all models given a brand
+// get all models given a make
 soloRouter.get('/models', soloStack.retrieveModels);
 
-// get all trims  given a brand and model
+// get all trims  given a make and a model
 soloRouter.get('/trims', soloStack.retrieveTrims);
 
-// get all years  given a brand, model and trim
+// get all years  given a make, model and trim
 soloRouter.get('/years', soloStack.retrieveYears);
 
-// get all years  given a brand, model and trim
+// get all years  given a make and model (no trim)
 soloRouter.get('/yearss3', soloStack.retrieveYearsS3);
 
-// get a class given the model
+// get a class for scenario 1
 soloRouter.get('/s1', soloStack.retrieveClassS1);
 
-// get a class given the trim
+// get a class for scenario 2
 soloRouter.get('/s2', soloStack.retrieveClassS2);
 
-// get a class given the model
+// get a class for scenario 3
 soloRouter.get('/s3', soloStack.retrieveClassS3);
 
-// get a class given the year
+// get a class for scenario 4
 soloRouter.get('/s4', soloStack.retrieveClassS4);
 
 // export menu Router

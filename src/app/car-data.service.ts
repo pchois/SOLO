@@ -10,24 +10,25 @@ export class CarDataService {
 
   private makesUrl = 'http://localhost:4000/api/solo/makes';  // URL to web api to retrieve makes
 
-  private modelsUrl = 'http://localhost:4000/api/solo/models';  // URL to web api to retrieve models based on the selected brand
+  private modelsUrl = 'http://localhost:4000/api/solo/models';  // URL to web api to retrieve models
 
-  private trimsUrl = 'http://localhost:4000/api/solo/trims';  // URL to web api to retrieve trims based on the selected brand and model
+  private trimsUrl = 'http://localhost:4000/api/solo/trims';  // URL to web api to retrieve trims
 
-  private yearsUrl = 'http://localhost:4000/api/solo/years';  // URL to web api to retrieve years
+  private yearsUrl = 'http://localhost:4000/api/solo/years';  // URL to web api to retrieve years (scenarios 1, 2, and 4)
 
-  private yearsS3Url = 'http://localhost:4000/api/solo/yearss3';  // URL to web api to retrieve years
+  private yearsS3Url = 'http://localhost:4000/api/solo/yearss3';  // URL to web api to retrieve years (scenario 3)
 
-  private classS1Url = 'http://localhost:4000/api/solo/s1';  // URL to web api to retrieve class
+  private classS1Url = 'http://localhost:4000/api/solo/s1';  // URL to web api to retrieve class (scenario 1)
 
-  private classS2Url = 'http://localhost:4000/api/solo/s2';  // URL to web api to retrieve class
+  private classS2Url = 'http://localhost:4000/api/solo/s2';  // URL to web api to retrieve class (scenario 2)
 
-  private classS3Url = 'http://localhost:4000/api/solo/s3';  // URL to web api to retrieve class
+  private classS3Url = 'http://localhost:4000/api/solo/s3';  // URL to web api to retrieve class (scenario 3)
 
-  private classS4Url = 'http://localhost:4000/api/solo/s4';  // URL to web api to retrieve class
+  private classS4Url = 'http://localhost:4000/api/solo/s4';  // URL to web api to retrieve class (scenario 4)
 
   constructor(private http: HttpClient) { }
 
+// functions to call the different URLs, introducing the required elements in the URL query
     getMake(): Observable<Make[]> {
     return this.http.get<Make[]>(this.makesUrl);
   }
