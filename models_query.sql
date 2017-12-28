@@ -1,1 +1,0 @@
-SELECT name from Trims t JOIN ModelTrimMap mtm on t.id = mtm.trim_id WHERE mtm.model_id = 269
