@@ -96,6 +96,7 @@ export class CarDataComponent implements OnInit {
     this.resetModels();
     this.resetTrims();
     this.resetYears();
+    this.resetYearsS3();
     this.resetClasses();
     this.query_data = {
       make_id: item.value,
@@ -115,6 +116,7 @@ export class CarDataComponent implements OnInit {
   getTrims(item: MatSelectChange): void {
     this.resetTrims();
     this.resetYears();
+    this.resetYearsS3();
     this.resetClasses();
     const make_id = this.query_data.make_id;
     this.query_data = {
@@ -141,6 +143,7 @@ export class CarDataComponent implements OnInit {
 // if there are no years, triggers scenario 2
   getYears(item: MatSelectChange): void {
     this.resetYears();
+    this.resetYearsS3();
     this.resetClasses();
     const make_id = this.query_data.make_id;
     const model_id = this.query_data.model_id;
@@ -163,6 +166,7 @@ export class CarDataComponent implements OnInit {
 // resets values for years and classes when the user starts a new flow
 // resets the value of the query parameters
   getYearsS3(model_id: number): void {
+    this.resetYears();
     this.resetYearsS3();
     this.resetClasses();
     const make_id = this.query_data.make_id;
