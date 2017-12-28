@@ -96,13 +96,16 @@ export class CarDataComponent implements OnInit {
     };
     console.log(this.query_data);
     this.cardataService.getTrim(this.query_data.make_id, this.query_data.model_id)
-    .subscribe(trims => this.trims = trims);
-    if(this.trims.length == 0){
-      this.getYearsS3(this.query_data.model_id);
-      if(this.yearsS3.length == 0){
-        this.getScenario1Class(this.query_data.make_id, this.query_data.model_id);
+    .subscribe(trims => {
+      this.trims = trims
+      if(this.trims.length == 0){
+        this.getYearsS3(this.query_data.model_id);
+        if(this.yearsS3.length == 0){
+          console.log('called yearsS3');
+          this.getScenario1Class(this.query_data.make_id, this.query_data.model_id);
+        }
       }
-    }
+    });
   }
 
   getYears(item: MatSelectChange): void {
@@ -122,10 +125,12 @@ export class CarDataComponent implements OnInit {
     };
     console.log(this.query_data);
     this.cardataService.getYear(this.query_data.make_id, this.query_data.model_id, this.query_data.trim_id)
-    .subscribe(years => this.years = years);
-    if(this.years.length == 0){
-      this.getScenario2Class(this.query_data.make_id, this.query_data.model_id, this.query_data.trim_id);
-  }
+    .subscribe(years => {
+      this.years = years
+      if(this.years.length == 0){
+        this.getScenario2Class(this.query_data.make_id, this.query_data.model_id, this.query_data.trim_id);
+        }
+    });
 }
 
   getYearsS3(model_id: number): void {
