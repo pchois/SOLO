@@ -8,5 +8,7 @@ app.get('/', function (req, res) {
     res.redirect('/');
 });
 
-app.listen(8080, 'localhost');
-console.log("Solo-web Server is Listening on port 8080");
+// configure the PORT
+app.listen((process.env.PORT || 8080), () => {
+  console.log(`Solo-web Server is Listening`);
+});
