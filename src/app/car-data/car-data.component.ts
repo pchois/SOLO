@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Year, Make, Model, Trim, Class } from '../car-data';
 import { CarDataService } from '../car-data.service';
 import { MatSelectChange } from '@angular/material';
 
@@ -21,15 +20,15 @@ export class CarDataComponent implements OnInit {
   selectedClassS4: string = '';
 
 // define the elements that will store the data coming back from the APIs
-  makes: Make[] = [];
-  models: Model[] = [];
-  trims: Trim[] = [];
-  years: Year[] = [];
-  yearsS3: Year[] = [];
-  scenario1: Class[] = [];
-  scenario2: Class[] = [];
-  scenario3: Class[] = [];
-  scenario4: Class[] = [];
+  makes = [];
+  models = [];
+  trims = [];
+  years = [];
+  yearsS3 = [];
+  scenario1 = [];
+  scenario2 = [];
+  scenario3 = [];
+  scenario4 = [];
 
 // define an element that will hold the parameters required to make an API call
 // it will be "reset" depending on the user's actions

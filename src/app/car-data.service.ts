@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Year, Make, Model, Trim, Class } from './car-data';
 import { Observable } from 'rxjs/Observable';
-import { MessageService } from './message.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CarDataComponent } from './car-data/car-data.component';
 

@@ -7,8 +7,6 @@ import { CarDataComponent } from './car-data/car-data.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { CarDataService } from './car-data.service';
-import { MessagesComponent } from './messages/messages.component';
-import { MessageService } from './message.service';
 
 import {MatSelectModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -29,8 +27,7 @@ export class DemoMaterialModule {}
 @NgModule({
   declarations: [
     AppComponent,
-    CarDataComponent,
-    MessagesComponent
+    CarDataComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +37,7 @@ export class DemoMaterialModule {}
     ReactiveFormsModule,
     DemoMaterialModule
   ],
-  providers: [CarDataService, MessageService],
+  providers: [CarDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
