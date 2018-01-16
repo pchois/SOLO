@@ -1,1 +1,12 @@
-@import '~@angular/material/prebuilt-themes/pink-bluegrey.css';
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+#component {
+  position:relative;
+  left:10px;
+}
+
+#text {
+  position:absolute;
+  left:20px;
+  top:200px;
+}

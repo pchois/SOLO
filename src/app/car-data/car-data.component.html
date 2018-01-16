@@ -1,5 +1,7 @@
 <h2> Select the available data that matches your vehicle. </h2>
 
+<div>
+<div id="dropdown">
 <mat-form-field>
   <mat-select placeholder="Select a make" (change)="getModels($event)" [(ngModel)]="selectedMake">
     <mat-option *ngFor="let make of makes" [value]="make.id">{{ make.name }}
@@ -34,19 +36,21 @@
     </mat-option>
   </mat-select>
 </mat-form-field>
-
-<div *ngIf="scenario1.length > 0">
-<mat-card *ngFor="let s1 of scenario1" [(ngModel)]="selectedClassS1" class="base-class">Your base class is: {{s1.name}}</mat-card>
 </div>
 
-<div *ngIf="scenario2.length > 0">
-<mat-card *ngFor="let s2 of scenario2" [(ngModel)]="selectedClassS2" class="base-class">Your base class is: {{s2.name}}</mat-card>
+<div *ngIf="scenario1.length > 0" id="base-class">
+<mat-card *ngFor="let s1 of scenario1" [(ngModel)]="selectedClassS1">Your base class is: {{s1.name}}</mat-card>
 </div>
 
-<div *ngIf="scenario3.length > 0">
-<mat-card *ngFor="let s3 of scenario3" [(ngModel)]="selectedClassS3" class="base-class">Your base class is: {{s3.name}}</mat-card>
+<div *ngIf="scenario2.length > 0" id="base-class">
+<mat-card *ngFor="let s2 of scenario2" [(ngModel)]="selectedClassS2">Your base class is: {{s2.name}}</mat-card>
 </div>
 
-<div *ngIf="scenario4.length > 0">
-<mat-card *ngFor="let s4 of scenario4" [(ngModel)]="selectedClassS4" class="base-class">Your base class is: {{s4.name}}</mat-card>
+<div *ngIf="scenario3.length > 0" id="base-class">
+<mat-card *ngFor="let s3 of scenario3" [(ngModel)]="selectedClassS3">Your base class is: {{s3.name}}</mat-card>
+</div>
+
+<div *ngIf="scenario4.length > 0" id="base-class">
+<mat-card *ngFor="let s4 of scenario4" [(ngModel)]="selectedClassS4">Your base class is: {{s4.name}}</mat-card>
+</div>
 </div>

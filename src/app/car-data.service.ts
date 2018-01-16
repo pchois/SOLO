@@ -7,25 +7,25 @@ import { CarDataComponent } from './car-data/car-data.component';
 @Injectable()
 export class CarDataService {
 
-  private makesUrl = 'https://solo-api-pms.herokuapp.com/api/solo/makes';  // URL to web api to retrieve makes
+  private makesUrl = 'http://localhost:8080/api/solo/makes';  // URL to web api to retrieve makes
 
-  private modelsUrl = 'https://solo-api-pms.herokuapp.com/api/solo/models';  // URL to web api to retrieve models
+  private modelsUrl = 'http://localhost:8080/api/solo/models';  // URL to web api to retrieve models
 
-  private trimsUrl = 'https://solo-api-pms.herokuapp.com/api/solo/trims';  // URL to web api to retrieve trims
+  private trimsUrl = 'http://localhost:8080/api/solo/trims';  // URL to web api to retrieve trims
 
-  private yearsUrl = 'https://solo-api-pms.herokuapp.com/api/solo/years';  // URL to web api to retrieve years (scenarios 1, 2, and 4)
+  private yearsUrl = 'http://localhost:8080/api/solo/years';  // URL to web api to retrieve years (scenarios 1, 2, and 4)
 
-  private yearsS3Url = 'https://solo-api-pms.herokuapp.com/api/solo/yearss3';  // URL to web api to retrieve years (scenario 3)
+  private yearsS3Url = 'http://localhost:8080/api/solo/yearss3';  // URL to web api to retrieve years (scenario 3)
 
-  private classS1Url = 'https://solo-api-pms.herokuapp.com/api/solo/s1';  // URL to web api to retrieve class (scenario 1)
+  private classS1Url = 'http://localhost:8080/api/solo/s1';  // URL to web api to retrieve class (scenario 1)
 
-  private classS2Url = 'https://solo-api-pms.herokuapp.com/api/solo/s2';  // URL to web api to retrieve class (scenario 2)
+  private classS2Url = 'http://localhost:8080/api/solo/s2';  // URL to web api to retrieve class (scenario 2)
 
-  private classS3Url = 'https://solo-api-pms.herokuapp.com/api/solo/s3';  // URL to web api to retrieve class (scenario 3)
+  private classS3Url = 'http://localhost:8080/api/solo/s3';  // URL to web api to retrieve class (scenario 3)
 
-  private classS4Url = 'https://solo-api-pms.herokuapp.com/api/solo/s4';  // URL to web api to retrieve class (scenario 4)
+//  private classS4Url = 'https://solo-api-pms.herokuapp.com/api/solo/s4';  // URL to web api to retrieve class (scenario 4)
 
-//  private classS4Url = 'http://localhost:8080/api/solo/s4';  // URL to web api to retrieve class (scenario 4)
+  private classS4Url = 'http://localhost:8080/api/solo/s4';  // URL to web api to retrieve class (scenario 4)
 
   constructor(private http: HttpClient) { }
 

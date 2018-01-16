@@ -1,4 +1,13 @@
 
-.base-class {
-  width: 300px;
+#base-class {
+  position: relative;
+  float: right;
+  margin-right: 780px;
+  top:0px;
+  width:310px;
+}
+
+#dropdown {
+  position:relative;
+  float: left;
 }
